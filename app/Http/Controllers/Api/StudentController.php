@@ -131,6 +131,10 @@ class StudentController extends Controller
 
         if($student) {
             $student->delete();
+            return response()->json([
+                'status' => 200,
+                'message' => "Student Deleted Successfuly",
+            ], 200);
         } else {
             return response()->json([
                 'status' => 404,
