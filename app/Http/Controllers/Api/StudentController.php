@@ -50,7 +50,7 @@ class StudentController extends Controller
                 'phone' => $request->phone,
             ]);
 
-            if($student) {
+            if($students) {
                 return response()->json([
                     'status' => 200,
                     'message' => "Student Created Successfuly"
