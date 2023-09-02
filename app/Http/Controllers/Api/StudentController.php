@@ -91,7 +91,7 @@ class StudentController extends Controller
             ], 404);
         }
     }
-    public function update(Request $request, int $id) {
+    public function update(Request $request, $id) {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:191',
             'course' => 'required|string|max:191',
@@ -104,16 +104,15 @@ class StudentController extends Controller
                 'errors' => $validator->messages()
             ], 422);
         } else {
-            $students = Student::find($id);
+            $student = Student::find($id);
 
             if($student) {
                 
-                $students->update([
-                    'name' => $request->name,
-                    'course' => $request->course,
-                    'email' => $request->email,
-                    'phone' => $request->phone,
-                ]);
+                $student->name = $request->input('name');
+                $student->course = $request->input('course');
+                $student->email = $request->input('email');
+                $student->phone = $request->input('phone');
+                $student->update();
 
                 return response()->json([
                     'status' => 200,
